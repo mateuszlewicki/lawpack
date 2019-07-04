@@ -1,0 +1,40 @@
+{
+    "conf": {
+        "env":"qa91",
+        "basedir":"/lawtrans/ALM_RELEASE/646744",
+        "system":"ZT",
+        "language":"SCHLUM2"
+    },
+    "appfiles":[
+        "ztsrc/ZT30PD",
+        "ztsrc/ZT30.scr"
+    ],
+    "pgmload":["xpgmdmp/ZT30.dmp"],
+    "qcompile":["ZT30"],
+    "scrgen":["ZT30"],
+    "genformap":["ZT30"],
+    "portalfiles":{
+        "forms":[
+            "persistdata/lawson/portal/content/forms/zt30.1_sendcancel.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_reccancel.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_recbacd.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_reciccd.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_sendiccd.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_entrylms2.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_entrylms.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_entryalloc2.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_recfp222.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_recba.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_inquire.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_error.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_sendbacd.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_entry.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_fp222.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_entryalloc.xml",
+            "persistdata/lawson/portal/content/forms/zt30.1_recalloc.xml"
+        ]
+    }
+
+
+
+}
