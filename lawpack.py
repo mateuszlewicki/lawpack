@@ -7,13 +7,9 @@ import json
 import os
 import sys
 import cfgctl
+# from cfgctl import Cfgctl
 
 DEBUG_MODE = 1
-# LOG_FILE = "/lawtrans/a699323/lawpack.log"    # TODO : migrate to config.json and/or to $LOG_FILE
-# INS_FILE = "input.json"                       # TODO: migrate to config.json
-# # SHELL = 'bash'                                # TODO: migrate to config.json
-# SHELL = '/usr/bin/ksh'                      # TODO: migrate to config.json
-# os.system("export LOG_FILE=/lawtrans/a699323/lawpack.log")
 
 
 # Terminal colors
@@ -85,11 +81,13 @@ def ParseJSON(to_decode):
 
 def CheckConfig():
     try:
-        conf_file = open('confg.json', 'r')
-    except FileNotFoundError:
+        conf_file = open('config.json', 'r')
+
+    except IOError:
         Warn("No config file in: "+os.getcwd() +'/')
         Info("Building config file")
         BuildConfig('default')
+
 
     # if conf_file is not None:
         #set varibles
@@ -101,9 +99,22 @@ def BuildConfig(type):
 
 def Main():
 
+    # TODO: base env vars
+    try:
+        if os.environ['DEVENV'] in ['True', True, '1']:
+            Debug("Running in DEV mode")
+            os.system('/bin/bash . devenv.sh')
+    except KeyError:
+        Debug("Running in DEV mode")
+        os.system('/bin/bash . devenv.sh')
+
+
+
     Debug("Reading the config file")
 
     CheckConfig()
+
+    os.remove('config.json')
 
     # Debug("Opening the instruction file")
     #
