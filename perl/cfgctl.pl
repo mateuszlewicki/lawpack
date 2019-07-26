@@ -1,5 +1,6 @@
 #! /usr/bin/perl
 
+
 use Path::Tiny;
 
 sub BuildDefault{
@@ -17,11 +18,23 @@ sub BuildDefault{
     <INS_FILE>$lawpackdir/$insfile</INS_FILE>
     <CLANG>SCHLUM2</CLANG>
     <SCSD>$SCSD </SCSD>
-    <CTC></CTC>
+    <CTC>
+        <SRC>.*src\$/*</SRC>
+        <PD>.*persistdata\$/*</PD>
+        <LIB>.*lib\$/*</LIB>
+        <SJ>.*starjet\$/*</SJ>
+    </CTC>
+    <PGMLOAD>.*dmp\$/*</PGMLOAD>
+    <COMPILE>.*src/.*PD\$</COMPILE>
+    <SJD>/home/starjet</SJD>
+    <PDD>\$LAWDIR/persistdata</PDD>
+    <LIBD>\$LAWDIR/\$XXPDL/.*lib\$</LIBD>
+    <SQL>/lawtrans/runsql/run_queryL9.sh \$XXPDL</SQL>
 </config>
 EOM
 
-    print($default);
+    # print($default);
+    return $default;
 
 }
 
@@ -58,7 +71,16 @@ sub BuildSCSD{
     }
     return $xmlstr;
 }
-#TODO: save to file
-#TODO: clasified to copy 
+#TODO: clasified to copy
 
-BuildDefault();
+my $filename = 'config.xml';
+
+if (not -e "/lawtrans/a699323/pl/$filename"){
+    open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
+    print $fh BuildDefault();
+
+    close $fh;
+    print "Config created\n";
+}else{
+    print "Config exist\n";
+}

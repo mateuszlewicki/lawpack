@@ -21,11 +21,7 @@ sub walk{
 
     while (my $file = $iter->()) {
 
-        # next if ($file !~ m/^.*\/$match.*$/);
-
-
         push @dirs, $file;
-
 
     }
 
@@ -34,7 +30,10 @@ sub walk{
 
 @dir_files = walk($pkg_dir);
 
+
+
 foreach my $file (@dir_files){
+
     print ("$file\n") if ($file =~ m/.*\.sql$/);
 
 }
