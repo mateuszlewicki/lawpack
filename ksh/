@@ -1,4 +1,4 @@
-#!/usr/bin/ksh
+#!/bin/env ksh
 # TODO: set as on HP-UX
 
 # NAME: lawcomp
@@ -13,7 +13,7 @@
 
 s_conf=true
 package=$1
-code=$(echo $package | cut -c 1-4)
+code=${package:0:2}
 lawdir=$LAWDIR
 pdl=$XXPDL
 src_cat=$lawdir'/'$pdl
@@ -21,58 +21,58 @@ src_cat=$lawdir'/'$pdl
 
 
 
-#	 show_conf
+#	 show_conf()
 #	 print used config
 
-function show_conf {
+function show_conf() {
 
-	printf 'Your config: \n%s:%s\n%s:%s\n%s:%s\n%s:%s\n' "Package" "${package}" "Lawson directory" "${lawdir}" "Product Line" "${pdl}" "Sources catalog" "${src_cat}"
+	printf 'Your config: \n %s:%s\n%s:%s\n%s:%s\n%s:%s\n' "Package" "${package}" "Lawson directory" "${lawdir}" "Product Line" "${pdl}" "Sources catalog" "${src_cat}"
 
 }
 
 
-#	hand_err
+#	hand_err()
 #	Check if last return code is other than zero
 #	if it is non-zero code print message then exit
 
-function hand_err {
-	if [[ $? -ne 0 ]]
+function hand_err() {
+	if [ ! $? ]
 	then
-		printf '[ ERROR ] Application occured no-zero return code %d at stage %s\nexiting' "$(echo -n $1)" ${1:-"Not Specified"}
+		printf '[ ERROR ] Application occured no-zero return code %d at stage %s\n exiting' "$(echo -n $1)" ${1:-"Not Specified"}
 		exit 1
 	fi
 }
 
-#	hand_comp_err
+#	hand_comp_err()
 #	Check if $package.err file is present in src catalog
 #	if it is present print error message, show last lines 
 # 	and exit
 
 
-function hand_comp_err {
-	if [[ -e ${src_cat}'/'${code}'src/'${package}'.err' ]]
+function hand_comp_err() {
+	if [ -e ${src_cat}'/'${code}'src/'${package}'.err' ]
 	then
-		print '[ ERROR ] { COMPILATION EXCEPTION }  \n%s \nexiting' "$(tail ${src_cat}'/'${code}'src/'${package}'.err')" 
+		print '[ ERROR ] { COMPILATION EXCEPTION }  \n %s \n exiting' "$(tail ${src_cat}'/'${code}'src/'${package}'.err')" 
 		exit 2
 	fi
 }
 
-# 	main
+# 	main()
 #	main script logic
 
-function main {
+function main() {
 	
 #	if $s_conf - Show config - variable is setted true
 #	print config and ask user for acceptance
 
-	if [[ -n $s_conf ]]
+	if $s_conf 
 	then
 		show_conf
 		read -p "Do you agree?" 
 		
 		# if user entered nN - simply not agreed - exit the script 
 
-		if [[ $REPLY = "n" || $REPLY = "N" ]]
+		if $REPLY == "n" || $REPLY == "N" 
 		then
 			exit 3
 		fi
@@ -83,7 +83,7 @@ function main {
 
 	# TODO qstatus
 	# check if program is still in the queue
-	while [[ $(qstatus | grep -c 'No jobs') ]]
+	 while [ qstatus | grep -c 'No jobs' ]
          do
                 sleep 1
          done
