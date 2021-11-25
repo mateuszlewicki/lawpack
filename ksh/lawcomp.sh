@@ -2,7 +2,7 @@
 # TODO: set as on HP-UX
 
 # NAME: lawcomp
-# AUTHOR: Mateusz Lewicki - ATOS - mateusz.lewicki@atos.net
+# AUTHOR: Mateusz Lewicki 
 # DESCRIPTION: 
 #	lawcomp is script which is taking care of program compilation and error checking.
 # 	script is using build-in commands as qcompile, scrgen, genformap, and so on. For
