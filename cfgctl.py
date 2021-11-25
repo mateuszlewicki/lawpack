@@ -30,21 +30,18 @@ def BuildDefault():
             }
     file = open('config.json', 'w')
     file.write(example.replace('\r',  ''))
-    # print(file.read())
-    # print(example)
+
     file.close()
     ## DEBUG: Content
     file = open('config.json', 'r')
     Debug(file.read())
     file.close()
-    # os.remove("config.json")
+
 
 def BuildSCSD():
     """docstring for BuildSCSD."""
     try:
-        WINTMP = 'C:\cygwin64\lawson\l9qa\law\qa91'
-        # lawdir = (os.environ["LAWDIR"]+"/"+os.environ['XXPDL']+"/").replace('\r', '')
-        lawdir = WINTMP
+        lawdir = (os.environ["LAWDIR"]+"/"+os.environ['XXPDL']+"/").replace('\r', '')
         lsdir = os.listdir(lawdir)
         print(lsdir)
         dir_dict = {}
